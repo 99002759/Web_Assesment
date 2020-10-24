@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Lokesh",
+        "city": "Anantapur",
+        "type": "Vegeterian",
+        "cuisine": ["Indian", "Chinese"]
+    },
+    {
+        "name": "Surabhi",
+        "city": "Mysore",
+        "type": "Vegeterian",
+        "cuisine": ["Indian","Japanese"]
+    },
+    {
+        "name": "Lucky",
+        "city": "Bangalore",
+        "type": "non-Vegeterian",
+        "cuisine": ["Indian"]
+    },
+    {
+        "name": "paradise",
+        "city": "Chennai",
+        "type": "non-Vegeterian",
+        "cuisine": ["Indian"]
+    }
+]

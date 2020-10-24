@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Monitoring System</title>
+    <script src="../Employee/employee.js"></script>
+    <script src="../common.js"></script>
+    <script>
+ 
+        let mgr = new empManager();
+        function init(){
+            $hide("div1");
+            $hide("div2");
+            $hide("div3");
+            
+            mgr.addEmployee(new employee(123, "mohith", "Bangalore"));
+            mgr.addEmployee(new employee(124, "lokesh", "Mysore"));
+            mgr.addEmployee(new employee(125, "teja", "kakinada"));
+            mgr.addEmployee(new employee(126, "sumanth", "ananthapur"));
+        }
+ 
+        
+        function onAddClick(){
+            $hide("div1");
+            $hide("div2");
+            $show("div3");
+            $hide("div4");
+        }
+    
+        function onAddEmployee(){
+            let id = $("newId").value;
+            let name = $("newName").value;
+            let address = $("newAddress").value;
+    
+            let emp = new employee(id, name, address)
+            mgr.addEmployee(emp);
+            $("newId").value ="";
+            $("newName").value ="";
+            $("newAddress").value ="";
+            alert("Employee added successfully");
+        }
+ 
+        function fillRecords(){
+            $hide("div3");
+            $hide("div2");
+            $show("div1");
+    
+           let heading = `<tr><th>Emp ID</th><th>Emp Name</th><th>Emp Address</th><th>Options</th>`;
+            $("tblRecords").innerHTML = heading;
+            $show("div1");
+            let data = mgr.getAll();
+            data.forEach(emp => {
+                let row = `<tr><td>${emp.empId}</td><td>${emp.empName}</td><td>${emp.empAddress}</td><td><a href="#" class="edit" sId="${emp.empId}">EDIT</a></td><td><a href="#" class="delete" sId="${emp.empId}">X</a></td>`;
+                $('tblRecords').innerHTML += row;
+                $mapEvent("edit", function(){
+                    debugger;
+                    let selectedId = this.attributes["sid"].value;
+                    let empObj = mgr.findEmployee(selectedId);
+                    $("empId").innerText = empObj.empId;
+                    $("empName").value = empObj.empName;
+                    $("empAddress").value = empObj.empAddress;
+                    $hide("div1");
+                    $hide("div3");
+                    $show("div2");
+                    $show("div4")
+                })
+            });
+        }
